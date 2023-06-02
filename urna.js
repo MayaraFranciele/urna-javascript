@@ -12,6 +12,9 @@ function urnaEletronica () {
     
     console.clear()
     
+    let horaDataInicio = boletimAtual();
+
+
     do {
         var VotoEscolhido = parseInt(prompt(" Digite 1 para votar no (a) "+NomeCandidato_1+ "\n Digite 2 para votar no (a) "+NomeCandidato_2+ "\n Digite 3 para votar no (a) "+NomeCandidato_3+ "\n Para votar em  BRANCO digite 5 \n Para votar em NULO digite 8 \n Para encerrar digite a SENHA \n Digite seu voto: "))
     
@@ -54,6 +57,8 @@ function urnaEletronica () {
         console.clear()
     
     } while (!EncerrarVotos)
+
+        let horaDataFinal = boletimAtual();
     
         Total =  Candidato_1 + Candidato_2 + Candidato_3 + Branco + Nulo
     
@@ -74,22 +79,46 @@ function urnaEletronica () {
         window.alert("Porcentagem de votos em BRANCO: "+PorcentBranco.toFixed(2)+ "% \n")
         window.alert("Porcentagem de votos NULOS: "+PorcentNulo.toFixed(2)+ "% \n")
     
+        window.alert("Data e hora inicial: "+horaDataInicio)
+        window.alert("Data e hora final: "+horaDataFinal)
+
+
         if (PorcentCand_1 > PorcentCand_2 && PorcentCand_1 > PorcentCand_3) {
-            window.alert("RESULTADO: O vencedor foi o "+NomeCandidato_1+" com "+PorcentCand_1.toFixed(2)+ PorcentBranco.toFixed(2)+ "% de votos. \n")
+            window.alert("RESULTADO: O vencedor foi o "+NomeCandidato_1+" com "+(PorcentCand_1 + PorcentBranco).toFixed(2)+ "% de votos. \n")
         } else if (PorcentCand_2 > PorcentCand_1 && PorcentCand_2 > PorcentCand_3) {
-            window.alert("RESULTADO: O vencedor foi o "+NomeCandidato_2+" com "+PorcentCand_2.toFixed(2) + PorcentBranco.toFixed(2)+ "% de votos. \n")
+            window.alert("RESULTADO: O vencedor foi o "+NomeCandidato_2+" com "+(PorcentCand_2 + PorcentBranco).toFixed(2)+ "% de votos. \n")
         } else if (PorcentCand_3 > PorcentCand_1 && PorcentCand_3 > PorcentCand_2) {
-            window.alert("RESULTADO: O vencedor foi o "+NomeCandidato_3+" com "+PorcentCand_3.toFixed(2) + PorcentBranco.toFixed(2)+ "% de votos. \n")
+            window.alert("RESULTADO: O vencedor foi o "+NomeCandidato_3+" com "+(PorcentCand_3 + PorcentBranco).toFixed(2)+ "% de votos. \n")
         } else {
             window.alert("RESULTADO: Empate")
         }
 
+
+        setTimeout(esperaSegundos, 2000)
 }
 
 function confirmaVoto(){
     let audio = new Audio('confirma-urna.mp3');
     audio.play();
 }
+
+function esperaSegundos(){
+    alert("Espere para poder iniciar novamente")
+}
+
+function boletimAtual(){
+    
+        var dataAtual = new Date();
+        var dia = dataAtual.getDate();
+        var mes = (dataAtual.getMonth() + 1);
+        var ano = dataAtual.getFullYear();
+        var horas = dataAtual.getHours();
+        var minutos = dataAtual.getMinutes();
+        return  dia + "/" + mes + " de " + ano + " " + horas + ":" + minutos + "h.";
+    }
+
+
+
 
 
 
